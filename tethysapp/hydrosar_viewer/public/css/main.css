@@ -1,0 +1,5 @@
+html, body, #app-content, #inner-app-content, #outer-container, #map {
+    margin: 0px;
+    padding: 2px;
+    height: 100%;
+}
