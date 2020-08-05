@@ -1,0 +1,34 @@
+from tethys_sdk.base import TethysAppBase, url_map_maker
+
+
+class HydrosarViewer(TethysAppBase):
+    """
+    Tethys app class for Hydrosar Viewer.
+    """
+
+    name = 'Hydrosar Viewer'
+    index = 'hydrosar_viewer:home'
+    icon = 'hydrosar_viewer/images/icon.gif'
+    package = 'hydrosar_viewer'
+    root_url = 'hydrosar-viewer'
+    color = '#c0392b'
+    description = ''
+    tags = ''
+    enable_feedback = False
+    feedback_emails = []
+
+    def url_maps(self):
+        """
+        Add controllers
+        """
+        UrlMap = url_map_maker(self.root_url)
+
+        url_maps = (
+            UrlMap(
+                name='home',
+                url='hydrosar-viewer',
+                controller='hydrosar_viewer.controllers.home'
+            ),
+        )
+
+        return url_maps
