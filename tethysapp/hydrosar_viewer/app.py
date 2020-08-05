@@ -6,13 +6,13 @@ class HydrosarViewer(TethysAppBase):
     Tethys app class for Hydrosar Viewer.
     """
 
-    name = 'Hydrosar Viewer'
+    name = 'HydroSAR Viewer'
     index = 'hydrosar_viewer:home'
     icon = 'hydrosar_viewer/images/icon.gif'
     package = 'hydrosar_viewer'
     root_url = 'hydrosar-viewer'
     color = '#c0392b'
-    description = ''
+    description = 'HydroSAR Viewer'
     tags = ''
     enable_feedback = False
     feedback_emails = []
