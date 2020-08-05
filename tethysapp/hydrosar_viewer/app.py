@@ -29,6 +29,16 @@ class HydrosarViewer(TethysAppBase):
                 url='hydrosar-viewer',
                 controller='hydrosar_viewer.controllers.home'
             ),
+            UrlMap(
+                name='uploadShapefile',
+                url='hydrosar-viewer/ajax/uploadShapefile',
+                controller='hydrosar_viewer.ajax.uploadshapefile',
+            ),
+            UrlMap(
+                name='uploadGeoJSON',
+                url='hydrosar-viewer/ajax/uploadGeoJSON',
+                controller='hydrosar_viewer.ajax.uploadgeojson',
+            ),
         )
 
         return url_maps

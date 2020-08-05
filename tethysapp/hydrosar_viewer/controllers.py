@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from tethys_sdk.permissions import login_required
 from tethys_sdk.gizmos import SelectInput, RangeSlider
+from .utilities import new_id
 
 @login_required()
 def home(request):
@@ -40,6 +41,7 @@ def home(request):
         'variables': variables,
         'events': events,
         'opacity': opacity,
+        'instance_id': new_id(),
     }
 
     return render(request, 'hydrosar_viewer/home.html', context)
