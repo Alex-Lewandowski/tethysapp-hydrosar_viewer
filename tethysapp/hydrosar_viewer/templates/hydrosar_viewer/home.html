@@ -11,6 +11,13 @@
   <div id="map"></div>
 {% endblock %}
 
+{% block app_navigation_items %}
+  <li class="title">HydroSAR Data Controls</li>
+    {% gizmo select_input variables %}
+    {% gizmo select_input events %}
+    {% gizmo range_slider opacity %}
+{% endblock %}
+
 {# Use the after_app_content block for modals #}
 {% block after_app_content %}
   <!-- Example Modal -->
@@ -36,9 +43,5 @@
 {% endblock %}
 
 {% block app_actions %}
-  {% gizmo save_button %}
-  {% gizmo edit_button %}
-  {% gizmo remove_button %}
-  {% gizmo previous_button %}
-  {% gizmo next_button %}
+
 {% endblock %}

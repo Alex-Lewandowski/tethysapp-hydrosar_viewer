@@ -1,74 +1,45 @@
 from django.shortcuts import render
 from tethys_sdk.permissions import login_required
-from tethys_sdk.gizmos import Button
+from tethys_sdk.gizmos import SelectInput, RangeSlider
 
 @login_required()
 def home(request):
     """
     Controller for the app home page.
     """
-    save_button = Button(
-        display_text='',
-        name='save-button',
-        icon='glyphicon glyphicon-floppy-disk',
-        style='success',
-        attributes={
-            'data-toggle':'tooltip',
-            'data-placement':'top',
-            'title':'Save'
-        }
+    variables = SelectInput(
+        display_text='Select HydroSAR Product',
+        name='variables',
+        multiple=False,
+        original=True,
+        options=(('Surface Water Extent', 'S1-SWE'),
+                 ('Flood Depth Proxy', 'S1-HAND-FD'),
+                 ('Agriculture Extent', 'S1-AG')),
     )
 
-    edit_button = Button(
-        display_text='',
-        name='edit-button',
-        icon='glyphicon glyphicon-edit',
-        style='warning',
-        attributes={
-            'data-toggle':'tooltip',
-            'data-placement':'top',
-            'title':'Edit'
-        }
+    events = SelectInput(
+        display_text='Select HydroSAR Event',
+        name='events',
+        multiple=False,
+        original=True,
+        options=(('2017 Bangladesh Flood', '2017-Bangladesh'),
+                 ('2020 Bangladesh Flood', '2020-Bangladesh'),
+                 ('2019 US Midwest Flood', '2019-Midwest')),
     )
 
-    remove_button = Button(
-        display_text='',
-        name='remove-button',
-        icon='glyphicon glyphicon-remove',
-        style='danger',
-        attributes={
-            'data-toggle':'tooltip',
-            'data-placement':'top',
-            'title':'Remove'
-        }
-    )
-
-    previous_button = Button(
-        display_text='Previous',
-        name='previous-button',
-        attributes={
-            'data-toggle':'tooltip',
-            'data-placement':'top',
-            'title':'Previous'
-        }
-    )
-
-    next_button = Button(
-        display_text='Next',
-        name='next-button',
-        attributes={
-            'data-toggle':'tooltip',
-            'data-placement':'top',
-            'title':'Next'
-        }
+    opacity = RangeSlider(
+        display_text='HydroSAR Layer Opacity',
+        name='opacity',
+        min=.5,
+        max=1,
+        step=.05,
+        initial=1,
     )
 
     context = {
-        'save_button': save_button,
-        'edit_button': edit_button,
-        'remove_button': remove_button,
-        'previous_button': previous_button,
-        'next_button': next_button
+        'variables': variables,
+        'events': events,
+        'opacity': opacity,
     }
 
     return render(request, 'hydrosar_viewer/home.html', context)

@@ -8,10 +8,10 @@ class HydrosarViewer(TethysAppBase):
 
     name = 'HydroSAR Viewer'
     index = 'hydrosar_viewer:home'
-    icon = 'hydrosar_viewer/images/icon.gif'
+    icon = 'hydrosar_viewer/images/floodlogo.JPG'
     package = 'hydrosar_viewer'
     root_url = 'hydrosar-viewer'
-    color = '#c0392b'
+    color = '#1F618D'
     description = 'HydroSAR Viewer'
     tags = ''
     enable_feedback = False
