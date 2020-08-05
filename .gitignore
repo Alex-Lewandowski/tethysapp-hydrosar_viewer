@@ -9,3 +9,12 @@
 *.DS_Store
 .idea/
 services.yml
+
+# ignore shapefile components
+*.shp
+*.shx
+*.prj
+*.dbf
+
+# ignore all contents of the user_workspace folder (the user uploads)
+tethysapp/hydrosar_viewer/workspaces/user_workspaces/*
