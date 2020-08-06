@@ -12,3 +12,15 @@ let wms_obj = newWMS();
 legend.addTo(map_obj);
 controlsObj = makeControls();
 latlon.addTo(map_obj);
+
+function requestTimeSeries(){
+    let data = {};
+    $.ajax({
+        url: URL_requestTimeSeries,
+        data: data,
+        dataType: 'json',
+        contentType: "application/json",
+        method: 'GET',
+        success: function (result) {console.log("Success")}
+    })
+}

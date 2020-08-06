@@ -60,8 +60,8 @@ function basemaps() {
 
 function newWMS() {
     // let layer = $("#variables").val();
-    let layer = "Band1";
-    let wmsurl = threddsbase + '2020_watermask/20200701_20200715_watermask.nc4';
+    let layer = "S1_SWE";
+    let wmsurl = threddsbase + '2020_watermask/hydrosar_data.ncml';
     let cs_rng = "0,1";
     if ($("#use_csrange").is(":checked")) {
         cs_rng = String($("#cs_min").val()) + ',' + String($("#cs_max").val())
@@ -93,8 +93,8 @@ function newWMS() {
 ////////////////////////////////////////////////////////////////////////  LEGEND AND LATLON CONTROLS
 let legend = L.control({position: 'bottomright'});
 legend.onAdd = function () {
-    let layer = "Band1";
-    let wmsurl = threddsbase + '2020_watermask/20200701_20200715_watermask.nc4';
+    let layer = "S1_SWE";
+    let wmsurl = threddsbase + '2020_watermask/hydrosar_data.ncml';
     let cs_rng = "0,1";
 
     let div = L.DomUtil.create('div', 'legend');

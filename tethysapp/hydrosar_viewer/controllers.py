@@ -14,9 +14,9 @@ def home(request):
         name='variables',
         multiple=False,
         original=True,
-        options=(('Surface Water Extent', 'S1-SWE'),
-                 ('Flood Depth Proxy', 'S1-HAND-FD'),
-                 ('Agriculture Extent', 'S1-AG')),
+        options=(('Surface Water Extent', 'S1_SWE'),
+                 ('Flood Depth Proxy', 'S1_HAND_FD'),
+                 ('Agriculture Extent', 'S1_AG')),
     )
 
     events = SelectInput(

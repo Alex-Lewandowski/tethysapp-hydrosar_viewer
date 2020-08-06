@@ -85,3 +85,8 @@ def uploadgeojson(request):
     except Exception as e:
         print(e)
         return JsonResponse({'status': 'failed'})
+
+
+def requestTimeSeries(request):
+    print("made it to requestTimeSeries")
+    return JsonResponse({'status': 'failed'})
