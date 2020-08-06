@@ -7,3 +7,8 @@ $.ajaxSetup({beforeSend: function (xhr, settings) {if (!csrfSafeMethod(settings.
 const map_obj = map();
 
 const my_basemaps = basemaps();
+map_obj.on("mousemove", function (event) {$("#mouse-position").html('Lat: ' + event.latlng.lat.toFixed(5) + ', Lon: ' + event.latlng.lng.toFixed(5));});
+let wms_obj = newWMS();
+legend.addTo(map_obj);
+controlsObj = makeControls();
+latlon.addTo(map_obj);

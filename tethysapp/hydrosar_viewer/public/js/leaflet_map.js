@@ -57,3 +57,73 @@ function basemaps() {
         "ESRI Physical": L.layerGroup([esri_physical]),
     }
 }
+
+function newWMS() {
+    // let layer = $("#variables").val();
+    let layer = "Band1";
+    let wmsurl = threddsbase + '2020_watermask/20200701_20200715_watermask.nc4';
+    let cs_rng = "0,1";
+    if ($("#use_csrange").is(":checked")) {
+        cs_rng = String($("#cs_min").val()) + ',' + String($("#cs_max").val())
+    }
+
+    let wmsLayer = L.tileLayer.wms(wmsurl, {
+        layers: layer,
+        dimension: 'time',
+        useCache: true,
+        crossOrigin: false,
+        format: 'image/png',
+        transparent: true,
+        opacity: $("#opacity_raster").val(),
+        BGCOLOR: '0x000000',
+        styles: 'boxfill/water_mask',
+        // styles: 'boxfill/' + $('#colorscheme').val(),
+        colorscalerange: cs_rng,
+    });
+
+    return L.timeDimension.layer.wms(wmsLayer, {
+        name: 'time',
+        requestTimefromCapabilities: true,
+        updateTimeDimension: true,
+        updateTimeDimensionMode: 'replace',
+        cache: 20,
+    }).addTo(map_obj);
+}
+
+////////////////////////////////////////////////////////////////////////  LEGEND AND LATLON CONTROLS
+let legend = L.control({position: 'bottomright'});
+legend.onAdd = function () {
+    let layer = "Band1";
+    let wmsurl = threddsbase + '2020_watermask/20200701_20200715_watermask.nc4';
+    let cs_rng = "0,1";
+
+    let div = L.DomUtil.create('div', 'legend');
+    let url = wmsurl + "?REQUEST=GetLegendGraphic&LAYER=" + layer + "&PALETTE=water_mask&COLORSCALERANGE=" + cs_rng;
+    div.innerHTML = '<img src="' + url + '" alt="legend" style="width:100%; float:right;">';
+    return div
+};
+
+///////////////////////////////////////////////////////////////////////// LAT/LONG DISPLAY
+let latlon = L.control({position: 'bottomleft'});
+latlon.onAdd = function () {
+    let div = L.DomUtil.create('div', 'well well-sm');
+    div.innerHTML = '<div id="mouse-position" style="text-align: center"></div>';
+    return div;
+};
+
+////////////////////////////////////////////////////////////////////////  MAP CONTROLS AND CLEARING
+// the layers box on the top right of the map
+function makeControls() {
+    return L.control.layers(my_basemaps, {
+        'HydroSAR Layer': wms_obj,
+        // 'Drawing on Map': drawnItems,
+        // 'Region Boundaries': layerRegion,
+    }).addTo(map_obj);
+}
+// you need to remove layers when you make changes so duplicates dont persist and accumulate
+function clearMap() {
+    controlsObj.removeLayer(layerWMS);
+    map_obj.removeLayer(layerWMS);
+    // controlsObj.removeLayer(layerRegion);
+    map_obj.removeControl(controlsObj);
+}
