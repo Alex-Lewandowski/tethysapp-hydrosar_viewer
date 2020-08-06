@@ -18,3 +18,6 @@ services.yml
 
 # ignore all contents of the user_workspace folder (the user uploads)
 tethysapp/hydrosar_viewer/workspaces/user_workspaces/*
+
+# ignore the data
+/data

@@ -1,5 +1,5 @@
 from tethys_sdk.base import TethysAppBase, url_map_maker
-
+from tethys_sdk.app_settings import CustomSetting
 
 class HydrosarViewer(TethysAppBase):
     """
@@ -42,5 +42,22 @@ class HydrosarViewer(TethysAppBase):
         )
 
         return url_maps
+
+
+    def custom_settings(self):
+        return (
+            CustomSetting(
+                name='thredds_path',
+                type=CustomSetting.TYPE_STRING,
+                description="Local file path to datasets (same as used by Thredds) (e.g. /data/thredds/)",
+                required=True,
+            ),
+            CustomSetting(
+                name='thredds_url',
+                type=CustomSetting.TYPE_STRING,
+                description="URL to the GLDAS folder served by THREDDS with trailing / (e.g. http://127.0.0.1:7000/thredds/)",
+                required=True,
+            )
+        )
 
 
