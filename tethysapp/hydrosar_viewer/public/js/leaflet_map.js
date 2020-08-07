@@ -61,7 +61,7 @@ function basemaps() {
 function newWMS() {
     // let layer = $("#variables").val();
     let layer = "S1_SWE";
-    let wmsurl = threddsbase + '2020_watermask/hydrosar_data.ncml';
+    let wmsurl = threddsbase + '2020_watermask/merged.ncml';
     let cs_rng = "0,1";
     if ($("#use_csrange").is(":checked")) {
         cs_rng = String($("#cs_min").val()) + ',' + String($("#cs_max").val())
@@ -94,11 +94,12 @@ function newWMS() {
 let legend = L.control({position: 'bottomright'});
 legend.onAdd = function () {
     let layer = "S1_SWE";
-    let wmsurl = threddsbase + '2020_watermask/hydrosar_data.ncml';
+    let wmsurl = threddsbase + "2020_watermask/merged.ncml";
+    let style = "water_mask";
     let cs_rng = "0,1";
 
     let div = L.DomUtil.create('div', 'legend');
-    let url = wmsurl + "?REQUEST=GetLegendGraphic&LAYER=" + layer + "&PALETTE=water_mask&COLORSCALERANGE=" + cs_rng;
+    let url = wmsurl + "?REQUEST=GetLegendGraphic&LAYER=" + layer + "&PALETTE=" + style + "&COLORSCALERANGE=" + cs_rng;
     div.innerHTML = '<img src="' + url + '" alt="legend" style="width:100%; float:right;">';
     return div
 };
