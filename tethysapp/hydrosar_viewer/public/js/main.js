@@ -17,7 +17,7 @@ latlon.addTo(map_obj);
 function update() {
     layerWMS = newWMS();
     controlsObj = makeControls();
-    legend.addTo(mapObj);
+    legend.addTo(map_obj);
 }
 
 function requestTimeSeries(){

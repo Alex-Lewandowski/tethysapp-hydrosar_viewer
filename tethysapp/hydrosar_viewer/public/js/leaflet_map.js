@@ -61,7 +61,7 @@ function basemaps() {
 function newWMS() {
     // let layer = $("#variables").val();
     let layer = "S1_SWE";
-    let wmsurl = threddsbase + '2020_watermask/merged.ncml';
+    let wmsurl = threddsbase + '2020_watermask/merged_2.nc4';
     let cs_rng = "0,1";
     if ($("#use_csrange").is(":checked")) {
         cs_rng = String($("#cs_min").val()) + ',' + String($("#cs_max").val())
@@ -94,7 +94,7 @@ function newWMS() {
 let legend = L.control({position: 'bottomright'});
 legend.onAdd = function () {
     let layer = "S1_SWE";
-    let wmsurl = threddsbase + "2020_watermask/merged.ncml";
+    let wmsurl = threddsbase + "2020_watermask/merged_2.nc4";
     let style = "water_mask";
     let cs_rng = "0,1";
 
