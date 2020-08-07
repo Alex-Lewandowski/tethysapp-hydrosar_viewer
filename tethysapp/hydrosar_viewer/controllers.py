@@ -9,6 +9,16 @@ def home(request):
     """
     Controller for the app home page.
     """
+    events = SelectInput(
+        display_text='Select HydroSAR Event',
+        name='events',
+        multiple=False,
+        original=True,
+        options=(('2020 Bangladesh Flood', '2020_Bangladesh'),
+                 ('2019 US Midwest Flood', '2019_Midwest'),
+                 ('2017 Bangladesh Flood', '2017_Bangladesh'),),
+    )
+
     variables = SelectInput(
         display_text='Select HydroSAR Product',
         name='variables',
@@ -19,28 +29,18 @@ def home(request):
                  ('Agriculture Extent', 'S1_AG')),
     )
 
-    events = SelectInput(
-        display_text='Select HydroSAR Event',
-        name='events',
-        multiple=False,
-        original=True,
-        options=(('2017 Bangladesh Flood', '2017-Bangladesh'),
-                 ('2020 Bangladesh Flood', '2020-Bangladesh'),
-                 ('2019 US Midwest Flood', '2019-Midwest')),
-    )
-
     opacity = RangeSlider(
         display_text='HydroSAR Layer Opacity',
         name='opacity',
-        min=.5,
+        min=0,
         max=1,
         step=.05,
         initial=1,
     )
 
     context = {
-        'variables': variables,
         'events': events,
+        'variables': variables,
         'opacity': opacity,
         'instance_id': new_id(),
         'thredds_url': App.get_custom_setting('thredds_url'),

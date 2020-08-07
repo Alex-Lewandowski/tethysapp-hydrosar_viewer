@@ -31,3 +31,4 @@ function requestTimeSeries(){
         success: function (result) {console.log("Success")}
     })
 }
+

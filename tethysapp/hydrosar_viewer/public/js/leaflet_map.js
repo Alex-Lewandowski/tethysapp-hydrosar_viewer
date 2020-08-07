@@ -59,13 +59,26 @@ function basemaps() {
 }
 
 function newWMS() {
+    // let eventDir = $("#events").val();
+        // To use this, you need to change the directory of your data to match the events in controllers.py
+    let eventDir = "2020_watermask";
     // let layer = $("#variables").val();
     let layer = "S1_SWE";
-    let wmsurl = threddsbase + '2020_watermask/merged.ncml';
-    let cs_rng = "0,1";
-    if ($("#use_csrange").is(":checked")) {
-        cs_rng = String($("#cs_min").val()) + ',' + String($("#cs_max").val())
+    let ncFile = "merged_2.nc4"
+    let wmsurl = threddsbase + eventDir + "/" + ncFile;
+
+    let styleObj = { // These are the names of the custom color palettes that you make
+        "S1_SWE": "water_mask",
+        "S1_HAND_FD": "flood_depth",
+        "S1_AG": "agriculture",
     }
+    let csRngObj = { // These are the "min,max" of the datasets
+        "S1_SWE": "0,1",
+        "S1_HAND_FD": "0,20",
+        "S1_AG": "0,1",
+    }
+    let style = styleObj[layer];
+    let cs_rng = csRngObj[layer];
 
     let wmsLayer = L.tileLayer.wms(wmsurl, {
         layers: layer,
@@ -76,8 +89,7 @@ function newWMS() {
         transparent: true,
         opacity: $("#opacity_raster").val(),
         BGCOLOR: '0x000000',
-        styles: 'boxfill/water_mask',
-        // styles: 'boxfill/' + $('#colorscheme').val(),
+        styles: 'boxfill/' + style,
         colorscalerange: cs_rng,
     });
 
@@ -93,10 +105,26 @@ function newWMS() {
 ////////////////////////////////////////////////////////////////////////  LEGEND AND LATLON CONTROLS
 let legend = L.control({position: 'bottomright'});
 legend.onAdd = function () {
+    // let eventDir = $("#events").val();
+        // To use this, you need to change the directory of your data to match the events in controllers.py
+    let eventDir = "2020_watermask";
+    // let layer = $("#variables").val();
     let layer = "S1_SWE";
-    let wmsurl = threddsbase + "2020_watermask/merged.ncml";
-    let style = "water_mask";
-    let cs_rng = "0,1";
+    let ncFile = "merged_2.nc4"
+    let wmsurl = threddsbase + eventDir + "/" + ncFile;
+
+    let styleObj = { // These are the names of the custom color palettes that you make
+        "S1_SWE": "water_mask",
+        "S1_HAND_FD": "flood_depth",
+        "S1_AG": "agriculture",
+    }
+    let csRngObj = { // These are the "min,max" of the datasets
+        "S1_SWE": "0,1",
+        "S1_HAND_FD": "0,20",
+        "S1_AG": "0,1",
+    }
+    let style = styleObj[layer];
+    let cs_rng = csRngObj[layer];
 
     let div = L.DomUtil.create('div', 'legend');
     let url = wmsurl + "?REQUEST=GetLegendGraphic&LAYER=" + layer + "&PALETTE=" + style + "&COLORSCALERANGE=" + cs_rng;
